@@ -11,12 +11,8 @@
     "bundle:clean": "npm run clean && npm run build",
     "clean": "rimraf dist",
     "lint": "eslint --ext .js --ext .jsx --ext .vue src/",
-    "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue src/"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
+    "lint-fix": "eslint --fix --ext .js --ext .jsx --ext .vue src/",
+    "pre-commit": "npm run lint"
   },
   "keywords": [],
   "author": "",
