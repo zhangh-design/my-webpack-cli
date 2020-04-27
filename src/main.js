@@ -1,4 +1,3 @@
-import Vue from 'vue';
+import Vue from 'vue'
 
-console.info(  Vue );
-let b= "sadas";
+console.info(Vue)
