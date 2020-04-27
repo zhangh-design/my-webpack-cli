@@ -15,6 +15,12 @@ const ieDynamicImportModule = function () {
   return fastConfig.ieDynamicImport ? utils.getIEDynamicImportModule() : {}
 }
 
+const useAlias = {}
+if (fastConfig.useAlias) {
+  for (const [key, value] of Object.entries(fastConfig.useAlias)) {
+    useAlias[key] = resolve(value)
+  }
+}
 const isDev = process.env.NODE_ENV === 'development' // 开发环境
 
 module.exports = {
@@ -50,9 +56,7 @@ module.exports = {
           ? resolve('./node_modules/vue/dist/vue.runtime.min.js')
           : resolve('./node_modules/vue/dist/vue.runtime.js'),
       '@': resolve('./src'),
-      '@server': resolve('./src/server'),
-      '@lib': resolve('./src/lib'),
-      '@assets': resolve('./src/assets')
+      ...useAlias
     },
     // 告诉 webpack 解析第三方模块时应该搜索的目录，默认 node_modules
     // modules: [path.resolve(__dirname, '../node_modules')], ie 11 环境中因为这样配置找不到 iterator.js 和 Promise.js 的babel支持文件

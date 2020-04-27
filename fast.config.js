@@ -15,6 +15,11 @@ module.exports = {
   isProdCssInline: false, // prod 模式下最终的 css 是否要内联到 style 标签内，默认 false 使用 link 引入
   isProdCssEntry: false, // MiniCssExtractPlugin 和 entry 入口文件结合打包 css 文件，一个入口 entry 对应一个 css 文件，默认false 表示所有引入的 css 最终都打包到一个 css 文件里面
   isDevFriendlyErrors: true, // dev 模式下 webpack-dev-server 的打包输出的信息是否由 friendly-errors-webpack-plugin 提供（没有打包信息），false 的话可以输出构建时的打包信息
+  useAlias: {
+    '@server': './src/server',
+    '@lib': './src/lib',
+    '@assets': './src/assets'
+  }, // 自定义 alias 别名
   // 配置通过 html-webpack-externals-plugin 加载远程 CDN 资源上的js文件，打包构建时 webpack 会通过分析 html-webpack-externals-plugin 中的模块将这些模块不打包到最终的 bundle 里面减小体积
   cdnJsArray: [
     {
