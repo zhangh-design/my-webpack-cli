@@ -112,15 +112,50 @@ const webpackConfig = merge(baseWebpackConfig, {
             }
           },
           {
-            loader: 'css-loader'
-            /* options: {
-              importLoaders: 1,
-              modules: {
-                localIdentName: config.build.localIdentName
-              }
-            } */
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
           },
           'postcss-loader'
+        ]
+      },
+      {
+        test: /\.(sa|sc)ss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              esModule: true
+            }
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2
+            }
+          },
+          'postcss-loader', // 新版 postcss-loader 要放在 sass-loader 之前
+          'sass-loader'
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              esModule: true
+            }
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2
+            }
+          },
+          'postcss-loader',
+          'less-loader'
         ]
       }
     ]
