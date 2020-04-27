@@ -1,11 +1,21 @@
 <template>
-  <div>
-    Hello World
+  <div id="app">
+    <router-view />
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'App'
+}
 </script>
 
-<style></style>
+<style>
+body,
+html,
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto !important;
+}
+</style>

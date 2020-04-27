@@ -100,6 +100,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg|blob)(\?.*)?$/,
         loader: 'url-loader',
         options: {
+          esModule: false, // 默认true（设置为 true img中的 src 会是对象 <img src="[object Module]"/>）
           limit: 8 * 1024, // 8kb
           context: path.resolve(__dirname, '../src'),
           name: utils.assetsPath('img/[path][name]-[hash:8].[ext]'),
