@@ -6,6 +6,7 @@ const path = require('path')
 const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const createVueLoaderConfig = require('./vue-loader.conf.js')
+// const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -47,7 +48,7 @@ module.exports = {
   resolve: {
     // 自动解析确定的扩展（逻辑性文件，资源文件还是建议显示引入）配置太多对性能有损耗
     // 要确保同一个目录下面没有重名的文件，如果存在的话，还是要写全路径
-    extensions: ['.js', '.json', '.vue', '.jsx'],
+    extensions: ['.js', '.vue'],
     // 创建 import 或 require 的别名，来确保模块引入变得更简单
     alias: {
       // 设置 vue 的别名为精确匹配，文件中就可以这样使用 import Vue from 'vue'（from 后面的 'vue' 就代表这里的配置）
@@ -82,7 +83,10 @@ module.exports = {
         test: /\.jsx?$/, // x? 表示同时使用 babel-loader 解析 js 和 jsx 文件
         exclude: /node_modules/,
         include: [resolve('src'), resolve('test')],
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        options: {
+          cacheDirectory: true // 开启缓存（node_modules/.cache/babel-loader）提升打包速度，第一次编译无效后面会提升速度
+        }
       },
       {
         test: /\.vue$/,
@@ -154,5 +158,7 @@ module.exports = {
     new VueLoaderPlugin(),
     // 全局提供帮助类库和工具函数（暴露全局变量）
     new webpack.ProvidePlugin(fastConfig.providePlugin)
+    // 设置缓存提高打包构建速度
+    // new HardSourceWebpackPlugin()
   ]
 }
