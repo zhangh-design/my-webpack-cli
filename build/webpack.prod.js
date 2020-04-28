@@ -22,7 +22,6 @@ const TerserPlugin = require('terser-webpack-plugin')
 const webpackConfig = merge(baseWebpackConfig, {
   // 不设置 mode 默认 production
   mode: process.env.NODE_ENV || 'production',
-  // mode: 'development',
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
     filename: utils.assetsPath('js/[name].[chunkhash].js'), // 入口文件打包生成js文件走 filename 配置项
@@ -38,16 +37,19 @@ const webpackConfig = merge(baseWebpackConfig, {
     // },
     // 压缩
     minimize: true,
-    // 压缩 css
+    // 压缩 js和css
     minimizer: [
       new TerserPlugin({
         terserOptions: {
           compress: {
-            drop_console: fastConfig.isProdConsoleLog || false
+            drop_console: fastConfig.isProdConsoleLog || false // console 日志输出
           }
-        }
+        },
+        cache: true, // 开启缓存
+        parallel: true, // 多线程
+        sourceMap: true // 启动 source-map ，默认false 不启动
       }),
-      new OptimizeCSSAssetsPlugin({})
+      new OptimizeCSSAssetsPlugin({}) // 压缩后 css 文件的 source-map 文件不会生成
     ],
     usedExports: true, // production 模式默认开启 Tree Shaking 摇树优化（可以通过在 package.json 中设置 sideEffects 属性来调整摇树优化过滤规则）
     splitChunks: {
@@ -108,7 +110,7 @@ const webpackConfig = merge(baseWebpackConfig, {
             // [webpack 3 版本的配置请看下面链接](https://vue-loader.vuejs.org/zh/guide/extract-css.html#webpack-4)
             loader: MiniCssExtractPlugin.loader,
             options: {
-              esModule: true
+              esModule: false
             }
           },
           {
@@ -126,7 +128,7 @@ const webpackConfig = merge(baseWebpackConfig, {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              esModule: true
+              esModule: false
             }
           },
           {
@@ -145,7 +147,7 @@ const webpackConfig = merge(baseWebpackConfig, {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              esModule: true
+              esModule: false
             }
           },
           {
@@ -175,8 +177,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
     // 从 bundle 中提取文本（CSS）到单独的文件
     new MiniCssExtractPlugin({
-      filename: utils.assetsPath('[name].[contenthash:8].css'),
-      chunkFilename: utils.assetsPath('/styles/[name].[contenthash:8].chunk.css')
+      filename: utils.assetsPath('/css/[name].[contenthash:8].css'),
+      chunkFilename: utils.assetsPath('/css/vendors/[name].[contenthash:8].chunk.css')
     }),
     // 以 template 摸板生成指定的html文件
     new HtmlWebpackPlugin({
@@ -251,4 +253,5 @@ if (fastConfig.cdnJsArray.length > 0) {
 if (fastConfig.isProdCssInline) {
   webpackConfig.plugins.push(new HTMLInlineCSSWebpackPlugin())
 }
+console.info('webpackConfig.devtool ', webpackConfig.devtool, webpackConfig.mode)
 module.exports = webpackConfig
