@@ -6,7 +6,7 @@
       </div>
       <div class="login-center clearfix">
         <div class="login-center-img">
-          <img src="../../assets/img/login/name.png">
+          <img src="@assets/img/login/name.png">
         </div>
         <div class="login-center-input">
           <input
@@ -24,7 +24,7 @@
       </div>
       <div class="login-center clearfix">
         <div class="login-center-img">
-          <img src="@/assets/img/login/password.png">
+          <img src="@assets/img/login/password.png">
         </div>
         <div class="login-center-input">
           <input
@@ -40,7 +40,10 @@
           </div>
         </div>
       </div>
-      <div class="login-button">
+      <div
+        class="login-button"
+        @click="onClick"
+      >
         登录
       </div>
     </div>
@@ -49,8 +52,18 @@
 </template>
 
 <script>
-export default {
 
+export default {
+  data () {
+    return {
+
+    }
+  },
+  methods: {
+    onClick (event) {
+      console.log('aaaaaaaa')
+    }
+  }
 }
 </script>
 
