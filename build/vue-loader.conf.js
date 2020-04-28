@@ -5,7 +5,7 @@ module.exports = (isDev) => {
     preserveWhitepace: true, // 去除 .vue 文件 template 模板内多余的空格
     // 将 .vue 文件中的 css 也通过 mini-css-extract-plugin 提取出来
     // 默认 false 表示 将 .vue 文件中的 css 放在 js 文件中比如动态导入的 js 模块在导入时在通过 js 将 css 代码添加到页面上
-    extractCSS: !isDev, // 开发环境不提取，生产环境提取
+    extractCSS: !isDev, // 开发环境不提取，生产环境提取 （mini-css-extract-plugin 还是会单独提取成 css 文件）
     // 模块化，指的是这个 css 只在这个模块里有效 <style lang='less' module></style>
     cssModules: {
       // 最终我们把 css 对应的 className 去编译成这样一个根据 文件路径-文件名-以及它整个文件的内容的 hash 生成的一个独立无二的名字

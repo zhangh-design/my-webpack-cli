@@ -1,3 +1,8 @@
+const fastConfig = require('./fast.config.js');
+const providePluginGlobals = {}
+for (let key of Object.keys(fastConfig.providePlugin)) {
+  providePluginGlobals[key] = true
+}
 module.exports = {
   root: true,
   env: {
@@ -23,6 +28,7 @@ module.exports = {
   globals: {
     "alert": true,
 		"values": true,
-		"entries": true
+    "entries": true,
+    ...providePluginGlobals
   }
 };

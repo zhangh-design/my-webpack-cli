@@ -5,17 +5,13 @@
 </template>
 
 <script>
+
 export default {
   name: 'App'
 }
 </script>
 
-<style>
-body,
-html,
-#app {
-  width: 100%;
-  height: 100%;
-  margin: 0 auto !important;
-}
+<style lang="less">
+@import "./assets/css/reset.css";
+@import "./assets/css/base.less";
 </style>

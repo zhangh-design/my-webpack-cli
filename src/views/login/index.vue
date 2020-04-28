@@ -52,16 +52,22 @@
 </template>
 
 <script>
-
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {
 
     }
   },
+  created () {
+    console.info(mapActions)
+  },
   methods: {
-    onClick (event) {
-      console.log('aaaaaaaa')
+    ...mapActions([
+      'login/loginAction'
+    ]),
+    onClick () {
+      this['login/loginAction']({ name: 'zhangh', pswd: '123' })
     }
   }
 }

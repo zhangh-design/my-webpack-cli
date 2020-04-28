@@ -253,5 +253,5 @@ if (fastConfig.cdnJsArray.length > 0) {
 if (fastConfig.isProdCssInline) {
   webpackConfig.plugins.push(new HTMLInlineCSSWebpackPlugin())
 }
-console.info('webpackConfig.devtool ', webpackConfig.devtool, webpackConfig.mode)
+
 module.exports = webpackConfig
