@@ -42,6 +42,7 @@
     "file-loader": "^6.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "glob": "^7.1.6",
+    "hard-source-webpack-plugin": "^0.13.1",
     "html-inline-css-webpack-plugin": "^1.8.0",
     "html-loader": "^1.1.0",
     "html-webpack-externals-plugin": "^3.8.0",
