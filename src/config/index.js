@@ -17,6 +17,6 @@ export const USER_API_CONFIG = {
 }
 // axios实例配置参数
 export const USER_AXIOS_CONFIG = {
-  baseURL: '',
+  baseURL: 'http://www.xxxx.com/',
   timeout: 30000
 }

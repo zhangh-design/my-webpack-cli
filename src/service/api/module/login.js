@@ -4,7 +4,6 @@ export default [
     method: 'GET',
     desc: '用户登录',
     path: 'bbbb',
-    mock: true,
     mockPath: '/api/login',
     params: { name: '', pswd: '' },
     validator: {
