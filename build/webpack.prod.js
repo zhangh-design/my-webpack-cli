@@ -173,12 +173,17 @@ const webpackConfig = merge(baseWebpackConfig, {
     // 清除构建包
     new CleanWebpackPlugin({
       verbose: true, // 在命令窗口中打印`clean-webpack-plugin`日志
-      cleanOnceBeforeBuildPatterns: [path.resolve(__dirname, '../dist'), path.resolve(__dirname, '../sprites')] // 清除的文件/文件夹
+      cleanOnceBeforeBuildPatterns: [
+        path.resolve(__dirname, '../dist'),
+        path.resolve(__dirname, '../sprites')
+      ] // 清除的文件/文件夹
     }),
     // 从 bundle 中提取文本（CSS）到单独的文件
     new MiniCssExtractPlugin({
       filename: utils.assetsPath('/css/[name].[contenthash:8].css'),
-      chunkFilename: utils.assetsPath('/css/vendors/[name].[contenthash:8].chunk.css')
+      chunkFilename: utils.assetsPath(
+        '/css/vendors/[name].[contenthash:8].chunk.css'
+      )
     }),
     // 以 template 摸板生成指定的html文件
     new HtmlWebpackPlugin({

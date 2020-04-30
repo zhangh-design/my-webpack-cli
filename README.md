@@ -38,9 +38,9 @@ public
 src
  |-assets
    |-css
-   |-exclude-img （不使用 image-webpack-loader 处理的图片，url-loader 会处理）
-   |-img （一般的图片资源 会使用 url-loader 和 image-webpack-loader）
-   |-sprites-img （生成精灵图）
+   |-exclude-img （不使用 image-webpack-loader和file-loader 处理的图片，url-loader 会处理）
+   |-img （一般的图片资源 会使用 url-loader 和 image-webpack-loader, file-loader 不处理）
+   |-sprites-img （生成精灵图 image-webpack-loader和url-loader 不会处理，file-loader 处理）
  |-components （项目组件）
  |-config
    |-interceptors（拦截器）

@@ -15,7 +15,7 @@ const cssSpritePlugin = []
 const isDev = process.env.NODE_ENV === 'development'
 if (fastConfig.isCssSprites(isDev)) {
   cssSpritePlugin.push(postcssSprites({
-    spritePath: './sprites', // 雪碧图合并后存放地址，在通过 image-webpack-loader 压缩图片 和 url-loader 把处理压缩后的图片放到 dist 目录
+    spritePath: 'sprites', // 雪碧图合并后存放地址，在通过 image-webpack-loader 压缩图片 和 url-loader 把处理压缩后的图片放到 dist 目录
     filterBy: function (image) {
       // 过滤一些不需要合并的图片，返回值是一个 promise，默认有一个 exist 的 filter
       if (image.url.indexOf('/assets/sprites-img/') === -1) {

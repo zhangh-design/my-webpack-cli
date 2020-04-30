@@ -22,7 +22,6 @@ if (fastConfig.useAlias) {
     useAlias[key] = resolve(value)
   }
 }
-const cssSpritesExclude = fastConfig.isCssSprites(process.env.NODE_ENV) ? [resolve('src/assets/sprites-img')] : []
 const isDev = process.env.NODE_ENV === 'development' // 开发环境
 
 module.exports = {
@@ -98,7 +97,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg|blob)(\?.*)?$/,
         // 压缩图片
         loader: 'image-webpack-loader',
-        exclude: [resolve('src/assets/exclude-img')].concat(cssSpritesExclude), // 排除某个文件下的图片不进行压缩处理
+        exclude: [resolve('src/assets/exclude-img'), resolve('src/assets/sprites-img')], // 排除某个文件下的图片不进行压缩处理
         // 通过enforce: 'pre'我们提高了 img-webpack-loader 的优先级，保证在url-loader、file-loader和svg-url-loader之前就完成了图片的优化。
         enforce: 'pre'
       },
@@ -115,7 +114,23 @@ module.exports = {
               ? config.build.urlLoaderPublicPath
               : config.dev.urlLoaderPublicPath // http://www.baidu.com/
         },
-        exclude: [].concat(cssSpritesExclude)
+        // 排除合并后的雪碧图目录，防止雪碧图小于 limit 值而被转换成 base64 的形式
+        exclude: [resolve('sprites'), resolve('src/assets/sprites-img')]
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|blob)(\?.*)?$/,
+        loader: 'file-loader',
+        options: {
+          esModule: false, // 默认true（设置为 true img中的 src 会是对象 <img src="[object Module]"/>）
+          context: path.resolve(__dirname, '../src'),
+          name: utils.assetsPath('img/[path][name]-[hash:8].[ext]'),
+          publicPath:
+            process.env.NODE_ENV === 'production'
+              ? config.build.urlLoaderPublicPath
+              : config.dev.urlLoaderPublicPath // http://www.baidu.com/
+        },
+        // 合并后的雪碧图使用 file-loader 来处理，防止雪碧图小于 url-loader 的 limit 值然后又被转换成 base64 的形式
+        include: [resolve('sprites'), resolve('src/assets/sprites-img')]
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
