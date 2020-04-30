@@ -3,7 +3,7 @@ export default [
     name: 'doLogin',
     method: 'GET',
     desc: '用户登录',
-    path: 'bbbb',
+    path: '/api/login',
     mockPath: '/api/login',
     params: { name: '', pswd: '' },
     validator: {

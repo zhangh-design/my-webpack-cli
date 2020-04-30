@@ -4,6 +4,7 @@
  * 入口文件
  * 动态载入各个api领域模型
  */
+import { camelCase } from 'lodash-es'
 const requireModule = require.context('./module', true, /\.js$/)
 const modules = {}
 
@@ -13,7 +14,7 @@ requireModule.keys().forEach(fileName => {
   if (fileName.split('/').length > 2) {
     moduleName = fileName.replace(/(\.\/|\.js)/g, '')
   } else {
-    moduleName = _camelCase(fileName.replace(/(\.\/|\.js)/g, ''))
+    moduleName = camelCase(fileName.replace(/(\.\/|\.js)/g, ''))
   }
   modules[moduleName] = {
     ...requireModule(fileName)

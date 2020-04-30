@@ -1,0 +1,15 @@
+/************
+ * 页面样式
+ ************/
+
+/* =========
+  404
+  ========= */
+.not-found-404 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 20px;
+  margin-left: -200px;
+  margin-top: -20px;
+}

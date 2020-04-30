@@ -22,6 +22,7 @@ if (fastConfig.useAlias) {
     useAlias[key] = resolve(value)
   }
 }
+const cssSpritesExclude = fastConfig.isCssSprites(process.env.NODE_ENV) ? [resolve('src/assets/sprites-img')] : []
 const isDev = process.env.NODE_ENV === 'development' // 开发环境
 
 module.exports = {
@@ -97,6 +98,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg|blob)(\?.*)?$/,
         // 压缩图片
         loader: 'image-webpack-loader',
+        exclude: [resolve('src/assets/exclude-img')].concat(cssSpritesExclude), // 排除某个文件下的图片不进行压缩处理
         // 通过enforce: 'pre'我们提高了 img-webpack-loader 的优先级，保证在url-loader、file-loader和svg-url-loader之前就完成了图片的优化。
         enforce: 'pre'
       },
@@ -112,7 +114,8 @@ module.exports = {
             process.env.NODE_ENV === 'production'
               ? config.build.urlLoaderPublicPath
               : config.dev.urlLoaderPublicPath // http://www.baidu.com/
-        }
+        },
+        exclude: [].concat(cssSpritesExclude)
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,

@@ -82,7 +82,7 @@ const webpackConfig = merge(baseWebpackConfig, {
           filename: utils.assetsPath('js/vendor/core-js-base.[chunkhash].js')
         }, */
         vendors: {
-          test: /[\\/]node_modules[\\/]/,
+          test: /[\\/]node_modules[\\/]^(?!_vuex@3.2.0@vuex)[\\/]/,
           priority: -10
         },
         styles: {
@@ -173,7 +173,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // 清除构建包
     new CleanWebpackPlugin({
       verbose: true, // 在命令窗口中打印`clean-webpack-plugin`日志
-      cleanOnceBeforeBuildPatterns: [path.resolve(__dirname, '../dist')] // 清除的文件/文件夹
+      cleanOnceBeforeBuildPatterns: [path.resolve(__dirname, '../dist'), path.resolve(__dirname, '../sprites')] // 清除的文件/文件夹
     }),
     // 从 bundle 中提取文本（CSS）到单独的文件
     new MiniCssExtractPlugin({
