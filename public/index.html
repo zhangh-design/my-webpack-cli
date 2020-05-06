@@ -4,6 +4,9 @@
     ${ require('raw-loader!./meta.html')}
     ${ require('raw-loader!./link.html')}
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <% if (htmlWebpackPlugin.options.host_platform === 'mobile') { %>
+    <script>${require('raw-loader!babel-loader!../node_modules/lib-flexible/flexible.js')}</script>
+    <% } %>
   </head>
   <body>
     <noscript>

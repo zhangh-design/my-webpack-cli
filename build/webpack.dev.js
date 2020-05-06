@@ -140,7 +140,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       template: config.dev.template,
       favicon: config.dev.favicon,
       hash: fastConfig.isAppHash, // 清除缓存
-      inject: true // 默认 true，将脚本注入到body元素的底部
+      inject: true, // 默认 true，将脚本注入到body元素的底部
+      host_platform: fastConfig.host_platform // 所运行的平台 web或者mobile
     }),
     /* new HtmlWebpackExternalsPlugin({
       externals: [

@@ -208,7 +208,8 @@ const webpackConfig = merge(baseWebpackConfig, {
       // 旧版配置为 'dependency' 可能会出现 `Cyclic dependency   错误：循环依赖` 的问题，可以升级插件到最新
       // `Cyclic dependency`网上的解决办法设置为`none`但这样页面加载顺序就不能保证了，可能会出现样式被覆盖的现象
       chunksSortMode: 'auto',
-      hash: fastConfig.isAppHash // 清除缓存
+      hash: fastConfig.isAppHash, // 清除缓存
+      host_platform: fastConfig.host_platform // 所运行的平台 web或者mobile
     }),
     // 拷贝静态资源到当前的工作目录（output.path）
     new CopyWebpackPlugin([

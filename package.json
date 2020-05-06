@@ -82,6 +82,7 @@
     "core-js": "^3.6.4",
     "element-ui": "^2.13.1",
     "jquery": "^3.5.0",
+    "lib-flexible": "^0.3.2",
     "lodash-es": "^4.17.15",
     "moment": "^2.24.0",
     "nprogress": "^0.2.0",
