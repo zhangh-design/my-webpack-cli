@@ -5,7 +5,7 @@
  */
 
 module.exports = {
-  host_platform: 'mobile', // web 或者 mobile，mobile 移动开发模式会自动使用 vm+rem 方案，web直接使用 px 即可
+  host_platform: 'mobile', // web 或者 mobile，mobile 移动开发模式会自动使用 vm+rem+postcss 方案，web直接使用 px 即可
   title: 'Hello Webpack', // 单页模式 html 的标题
   isAppHash: false, // 是否清除整个应用级别缓存 默认 false（如果为 true 将在项目文件内容发生改变的情况下构建后将所有文件的缓存失效，导致用户的本地缓存将失效必须重新下载所有文件）
   isMpa: false, // 是否多页面模式，默认 false 表示单页模式
