@@ -35,6 +35,7 @@ if (fastConfig.isCssSprites(isDev)) {
 const pr2remPlugin = []
 if (fastConfig.isUsedPr2Rem) {
   // font-size: 14pr会不转义，因为 font-size 放在了 propBlackList 黑名单中
+  // 7.5pr 转换后就是 1rem 然后 1rem 就会等于 font-siz e的 1vw，1vw 等于 布局视口宽度（document.clientWidth）/100=1%
   //  <style>.frame {width: 7.5pr;height: 50pr;}.frame span {font-size: 14px; /* 14rem */}</style>
   // pr转rem，不直接使用px转rem防止我们可能有时候确实要使用px比如font-size
   const pr2remConfig = {
