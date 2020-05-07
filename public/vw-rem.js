@@ -11,6 +11,7 @@
     // 支持就不在做处理
     return
   }
+  // 下面计算html根节点font-size像素大小的代码来源于手淘的 lib-flexible 库
   var docEl = doc.documentElement
   var metaEl = doc.querySelector('meta[name="viewport"]')
   var flexibleEl = doc.querySelector('meta[name="flexible"]')
