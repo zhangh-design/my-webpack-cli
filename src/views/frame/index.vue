@@ -12,8 +12,8 @@ export default {}
 
 <style>
 .frame {
-  width: 7.5pr;
-  height: 50pr;
+  width: 200px;
+  height: 100px;
 }
 .frame span {
   font-size: 14px;
