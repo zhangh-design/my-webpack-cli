@@ -34,13 +34,17 @@ if (fastConfig.isCssSprites(isDev)) {
 }
 const pr2remPlugin = []
 if (fastConfig.isUsedPr2Rem) {
+  // font-size: 14pr会不转义，因为 font-size 放在了 propBlackList 黑名单中
+  //  <style>.frame {width: 7.5pr;height: 50pr;}.frame span {font-size: 14px; /* 14rem */}</style>
   // pr转rem，不直接使用px转rem防止我们可能有时候确实要使用px比如font-size
   const pr2remConfig = {
     // 设计图为1242px，一份 root 对应着 rootWidth/100=12.42px
     // （这里是恒等于1242px 来做rem和pr之间的转换定义，也就是css代码中的计算都是按照12.42）1rem=12.42pr （比如：50pr就相当于4rem）， 1vw = 布局视口宽度（document.clientWidth）/100=1% （比如：布局视口宽度是351px那么1vw就是3.5px，那么在根节点html的fons-size是1vw的情况下1rem也就是3.5px）
     // rootValue: 12.42,
     // 设计图为750px，一份 root 对应着 rootWidth/100=7.5px
-    rootValue: fastConfig.pr2RemRootValue ? (fastConfig.pr2RemRootValue / 100) : 7.5, // 1rem=7.5pr
+    rootValue: fastConfig.pr2RemRootValue
+      ? fastConfig.pr2RemRootValue / 100
+      : 7.5, // 1rem=7.5pr
     // 这里是基本单位，前面设置了1vw
     unitPrecision: 1,
     propWhiteList: [],
