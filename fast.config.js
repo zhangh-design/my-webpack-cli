@@ -5,7 +5,7 @@
  */
 
 module.exports = {
-  isUsedPr2Rem: true, // 如果需要使用相对单位那么设置为 true（会自动使用 vw+rem+postcss 方案，css中的单位就要使用 pr 而不是 px ），false 表示 px
+  isUsedPr2Rem: false, // 如果需要使用相对单位那么设置为 true（会自动使用 vw+rem+postcss 方案，css中的单位就要使用 pr 而不是 px ），false 表示 px
   pr2RemRootValue: '750', // 设计图为750px（默认值为750px对应移动端设计图），如果isUsedPr2Rem: false 则此参数设置了也不会使用
   title: 'Hello Webpack', // 单页模式 html 的标题
   isAppHash: false, // 是否清除整个应用级别缓存 默认 false（如果为 true 将在项目文件内容发生改变的情况下构建后将所有文件的缓存失效，导致用户的本地缓存将失效必须重新下载所有文件）
