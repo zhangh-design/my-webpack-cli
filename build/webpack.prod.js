@@ -209,7 +209,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       // `Cyclic dependency`网上的解决办法设置为`none`但这样页面加载顺序就不能保证了，可能会出现样式被覆盖的现象
       chunksSortMode: 'auto',
       hash: fastConfig.isAppHash, // 清除缓存
-      host_platform: fastConfig.host_platform // 所运行的平台 web或者mobile
+      isUsedPr2Rem: fastConfig.isUsedPr2Rem // 是否使用相对单位pr->rem
     }),
     // 拷贝静态资源到当前的工作目录（output.path）
     new CopyWebpackPlugin([

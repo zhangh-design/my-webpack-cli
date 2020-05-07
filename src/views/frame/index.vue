@@ -16,6 +16,6 @@ export default {}
   height: 50pr;
 }
 .frame span {
-  font-size: 3pr;
+  font-size: 14px;
 }
 </style>
