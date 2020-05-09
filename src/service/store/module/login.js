@@ -5,29 +5,41 @@ import Vue from 'vue'
 
 const state = {
   // 用户基本信息
-  data: {
-    name: '',
-    coder: '',
-    role: '',
-    dept: ''
-  },
+  data: null,
   // 是否已登陆
-  isLogin: false,
-  // 系统用户访问令牌
-  token: ''
+  isLogin: false
 }
-const getters = {}
+const getters = {
+  getUserInfo: state => {
+    return { ...state.data }
+  },
+  getLoginStatus: state => {
+    return state.isLogin
+  }
+}
 const actions = {
   exitAxtion ({ commit, state }) {},
   loginAction ({ commit, state }, { name, pswd }) {
-    console.info('bbbbbbbbbb', name, pswd, Vue.prototype.$api)
-    Vue.prototype.$api['login/doLogin']({ params: { name, pswd } })
-      .then(resData => {
-        console.log('resData', resData)
-      }).catch((error) => { console.info('111111111111111111', error) })
+    return new Promise((resolve, reject) => {
+      Vue.prototype.$api['login/doLogin']({ data: { name, pswd }, headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' } })
+        .then(resData => {
+          commit('UPDATE_DATA', resData.data)
+          resolve()
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
   }
 }
-const mutations = {}
+const UPDATE_DATA = 'UPDATE_DATA'
+const mutations = {
+  // 更新用户信息
+  [UPDATE_DATA] (state, data) {
+    state.data = data
+    state.isLogin = true
+  }
+}
 export default {
   namespaced: true,
   state,

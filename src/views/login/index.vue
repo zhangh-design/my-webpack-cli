@@ -12,7 +12,7 @@
           <input
             type="text"
             name=""
-            value=""
+            v-model="name"
             placeholder="请输入您的用户名"
             onfocus="this.placeholder=''"
             onblur="this.placeholder='请输入您的用户名'"
@@ -30,7 +30,7 @@
           <input
             type="password"
             name=""
-            value=""
+            v-model="paswd"
             placeholder="请输入您的密码"
             onfocus="this.placeholder=''"
             onblur="this.placeholder='请输入您的密码'"
@@ -40,11 +40,14 @@
           </div>
         </div>
       </div>
-      <div
-        class="login-button"
-        @click="onClick"
-      >
-        登录
+      <div class="login-button">
+        <el-button
+          type="primary"
+          :loading="loading"
+          @click="onClick"
+        >
+          {{ loading?'登录中':'登录' }}
+        </el-button>
       </div>
     </div>
     <div class="sk-rotating-plane" />
@@ -56,18 +59,25 @@ import { mapActions } from 'vuex'
 export default {
   data () {
     return {
-
+      name: '',
+      paswd: '',
+      loading: false
     }
-  },
-  created () {
-    console.info(mapActions)
   },
   methods: {
     ...mapActions([
       'login/loginAction'
     ]),
     onClick () {
-      this['login/loginAction']({ name: 'zhangh', pswd: '123' })
+      this.loading = true
+      this['login/loginAction']({ name: this.name, pswd: this.paswd }).then(() => {
+        this.$message({ message: '验证成功', type: 'success' })
+        this.$router.push({ path: '/' })
+      }).catch((error) => {
+        console.error(error)
+      }).finally(() => {
+        this.loading = false
+      })
     }
   }
 }

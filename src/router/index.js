@@ -26,6 +26,12 @@ const constRouterMap = [
     children: []
   },
   {
+    path: '/helper',
+    name: 'helper',
+    component: () => import(/* webpackChunkName:"views/frame" */ '@/views/helper/index.vue'),
+    children: []
+  },
+  {
     path: '*', // 404 页面
     component: () => import(/* webpackChunkName:"views/404" */ '@/views/error-page/404.vue')
   }

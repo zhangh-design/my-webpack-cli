@@ -12,7 +12,7 @@ module.exports = {
   isMpa: false, // 是否多页面模式，默认 false 表示单页模式
   isProdConsoleLog: true, // prod 模式下是否输出 console 日志
   ieDynamicImport: false, // 针对 ie 浏览器是否需要支持 动态import 导入模块的功能（对 chrome Firefox Edge 无影响），如果在 .babelrc 中 browsers 不需要支持 ie 环境那么这里配置 false 即不用考虑任何 ie 浏览器，如果你的业务代码里没有动态import那么也设置 false 即可
-  isBundleAnalyzer: false, // 是否使用 webpack-bundle-analyzer 进行打包分析
+  isBundleAnalyzer: true, // 是否使用 webpack-bundle-analyzer 进行打包分析
   // isDevCssOneStyle: false, // dev 模式下最终的 css 是否要合并到一个 <style></style> 标签内，默认 false 每一次处理引入的样式文件都会在 DOM 上创建一个 <style> 标签（此项配置针对 style-loader）
   isProdCssInline: false, // prod 模式下最终的 css 是否要内联到 style 标签内，默认 false 使用 link 引入
   isProdCssEntry: false, // MiniCssExtractPlugin 和 entry 入口文件结合打包 css 文件，一个入口 entry 对应一个 css 文件，默认false 表示所有引入的 css 最终都打包到一个 css 文件里面
@@ -26,7 +26,7 @@ module.exports = {
     '@assets': './src/assets',
     '@plugins': './src/plugins'
   }, // 自定义 alias 别名
-  noCheckRouters: ['helper'], // 白名单路由
+  routerWhiteList: ['helper'], // 白名单路由
   // 配置通过 html-webpack-externals-plugin 加载远程 CDN 资源上的js文件，打包构建时 webpack 会通过分析 html-webpack-externals-plugin 中的模块将这些模块不打包到最终的 bundle 里面减小体积
   // 需要有外网
   cdnJsArray: [
