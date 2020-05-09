@@ -1,16 +1,5 @@
 <template>
   <div id="particles-js">
-    <div class="sprites a" />
-    <div class="sprites b" />
-    <div class="sprites c" />
-    <div class="sprites d" />
-    <div class="sprites e" />
-    <div class="sprites f" />
-    <div class="sprites g" />
-    <div class="sprites h" />
-    <div class="sprites i" />
-    <div class="sprites j" />
-    <!-- <img src="@assets/sprites-img/10.png"> -->
     <div class="login">
       <div class="login-top">
         登录
