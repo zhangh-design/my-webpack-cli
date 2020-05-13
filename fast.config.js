@@ -1,5 +1,4 @@
 'use strict'
-
 /**
  * webpack 打包自定义配置文件
  */
@@ -10,7 +9,7 @@ module.exports = {
   title: 'Hello Webpack', // 单页模式 html 的标题
   isAppHash: false, // 是否清除整个应用级别缓存 默认 false（如果为 true 将在项目文件内容发生改变的情况下构建后将所有文件的缓存失效，导致用户的本地缓存将失效必须重新下载所有文件）
   isMpa: false, // 是否多页面模式，默认 false 表示单页模式
-  isProdConsoleLog: true, // prod 模式下是否输出 console 日志
+  isProdConsoleLog: true, // prod 模式下是否过滤掉 console 日志
   ieDynamicImport: false, // 针对 ie 浏览器是否需要支持 动态import 导入模块的功能（对 chrome Firefox Edge 无影响），如果在 .babelrc 中 browsers 不需要支持 ie 环境那么这里配置 false 即不用考虑任何 ie 浏览器，如果你的业务代码里没有动态import那么也设置 false 即可
   isBundleAnalyzer: true, // 是否使用 webpack-bundle-analyzer 进行打包分析
   // isDevCssOneStyle: false, // dev 模式下最终的 css 是否要合并到一个 <style></style> 标签内，默认 false 每一次处理引入的样式文件都会在 DOM 上创建一个 <style> 标签（此项配置针对 style-loader）
@@ -45,15 +44,8 @@ module.exports = {
       module: 'axios',
       entry: 'https://cdn.bootcss.com/axios/0.18.0/axios.min.js',
       global: 'axios'
-    },
-    {
-      module: 'vuex',
-      entry: 'https://cdn.bootcdn.net/ajax/libs/vuex/3.2.0/vuex.min.js',
-      global: 'Vuex'
     }
   ],
-  // 增加 splitChunks 代码分割规则
-  splitChunksCacheGroups: {},
   // 全局提供帮助类库和工具函数（暴露全局变量），会增加构建 bundle 的体积不要配置太多
   providePlugin: {
     // $: 'jquery',

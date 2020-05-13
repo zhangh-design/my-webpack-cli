@@ -41,13 +41,13 @@
         </div>
       </div>
       <div class="login-button">
-        <el-button
+        <fast-button
           type="primary"
           :loading="loading"
           @click="onClick"
         >
           {{ loading?'登录中':'登录' }}
-        </el-button>
+        </fast-button>
       </div>
     </div>
     <div class="sk-rotating-plane" />

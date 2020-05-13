@@ -22,3 +22,11 @@ exports.getIEDynamicImportModule = function () {
     Promise: 'core-js/modules/es.promise'
   }
 }
+
+// JS数组去掉某一个元素
+exports.arrayRemove = function (list, val) {
+  var index = list.indexOf(val)
+  if (index > -1) {
+    this.splice(index, 1)
+  }
+}

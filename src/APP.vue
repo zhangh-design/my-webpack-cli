@@ -5,7 +5,8 @@
 </template>
 
 <script>
-
+import a from './views/a.js'
+console.info('aaaaaa111 ', a)
 export default {
   name: 'App'
 }

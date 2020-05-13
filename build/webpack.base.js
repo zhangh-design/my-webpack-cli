@@ -1,4 +1,5 @@
 'use strict'
+// const packageConfig = require('../package.json')
 const config = require('../config/index.js')
 const fastConfig = require('../fast.config.js')
 const utils = require('../build/utils.js')
@@ -7,7 +8,7 @@ const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const createVueLoaderConfig = require('./vue-loader.conf.js')
 // const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
-
+// console.info('aaaaaaaaaaaaa ', utils.arrayRemove(Object.keys(packageConfig.dependencies), ['@babel/polyfill', '@babel/runtime-corejs3', 'axios-api-query', '@babel/runtime', 'core-js', 'axios', 'jquery', 'vue-router', 'vue', 'vuex']))
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
