@@ -7,9 +7,7 @@ import { Message, Input, Button, Container, Header, Aside, Main, Footer } from '
 import { FastTextInput, FastButton, FastPanel, FastBorderLayout } from 'fast-element-ui'
 import 'fast-element-ui/lib/theme-default/index.css'
 import '@assets/css/main.css'
-import a from './views/a.js'
 
-console.log('aaaaaa ', a)
 Vue.use(inject)
 Vue.use(FastTextInput, Input)
 Vue.use(FastButton, Button)
