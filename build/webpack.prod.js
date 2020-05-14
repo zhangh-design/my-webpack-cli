@@ -21,7 +21,12 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default
 const TerserPlugin = require('terser-webpack-plugin')
 
+// 需要 splitChunks 分割出的第三方依赖包
 const otherDependencies = utils.arrayRemoveItems(Object.keys(packageConfig.dependencies), fastConfig.removeOtherDependenciesCacheGroupsLibs || [])
+// css预编译全局变量文件
+const lessVariableFilePath = '../src/assets/css/less/variables.less'
+const scssVariableFilePath = '../src/assets/css/scss/variables.scss'
+
 const webpackConfig = merge(baseWebpackConfig, {
   // 不设置 mode 默认 production
   mode: process.env.NODE_ENV || 'production',
@@ -175,7 +180,15 @@ const webpackConfig = merge(baseWebpackConfig, {
                 options: createCssLoaderConfig(true, 2)
               },
               'postcss-loader',
-              'sass-loader'
+              'sass-loader',
+              {
+                loader: 'sass-resources-loader',
+                options: {
+                  resources: [
+                    path.resolve(__dirname, scssVariableFilePath)
+                  ]
+                }
+              }
             ]
           },
           {
@@ -193,7 +206,15 @@ const webpackConfig = merge(baseWebpackConfig, {
                 }
               },
               'postcss-loader', // 新版 postcss-loader 要放在 sass-loader 之前
-              'sass-loader'
+              'sass-loader',
+              {
+                loader: 'sass-resources-loader',
+                options: {
+                  resources: [
+                    path.resolve(__dirname, scssVariableFilePath)
+                  ]
+                }
+              }
             ]
           }
         ]
@@ -215,7 +236,15 @@ const webpackConfig = merge(baseWebpackConfig, {
                 options: createCssLoaderConfig(true, 2)
               },
               'postcss-loader',
-              'less-loader'
+              'less-loader',
+              {
+                loader: 'sass-resources-loader',
+                options: {
+                  resources: [
+                    path.resolve(__dirname, lessVariableFilePath)
+                  ]
+                }
+              }
             ]
           },
           {
@@ -233,7 +262,15 @@ const webpackConfig = merge(baseWebpackConfig, {
                 }
               },
               'postcss-loader',
-              'less-loader'
+              'less-loader',
+              {
+                loader: 'sass-resources-loader',
+                options: {
+                  resources: [
+                    path.resolve(__dirname, lessVariableFilePath)
+                  ]
+                }
+              }
             ]
           }
         ]

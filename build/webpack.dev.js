@@ -14,6 +14,9 @@ const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin')
 // cross-env NODE_ENV=deveopment PORT=9099 webpack-dev-server --progress --config ./build/webpack.dev.js
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
+// css预编译全局变量文件
+const lessVariableFilePath = '../src/assets/css/less/variables.less'
+const scssVariableFilePath = '../src/assets/css/scss/variables.scss'
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   mode: process.env.NODE_ENV || 'development',
@@ -43,6 +46,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   },
   module: {
     rules: [
+      // 它会应用到普通的 `.css` 文件
+      // 以及 `.vue` 文件中的 `<style>` 块
       {
         test: /\.css$/,
         oneOf: [
@@ -61,7 +66,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
           // 这里匹配普通的 `<style>` 或 `<style scoped>`
           {
             use: [
-              'vue-style-loader',
+              'vue-style-loader', // .vue 的 style 块
               /* {
                 loader: 'style-loader', // 把 css 样式内容内联到 style 标签内
                 options: {
@@ -98,7 +103,15 @@ const devWebpackConfig = merge(baseWebpackConfig, {
                 options: createCssLoaderConfig(true, 2)
               },
               'postcss-loader',
-              'sass-loader'
+              'sass-loader',
+              {
+                loader: 'sass-resources-loader',
+                options: {
+                  resources: [
+                    path.resolve(__dirname, scssVariableFilePath)
+                  ]
+                }
+              }
             ]
           },
           {
@@ -111,7 +124,15 @@ const devWebpackConfig = merge(baseWebpackConfig, {
                 }
               },
               'postcss-loader', // 新版 postcss-loader 要放在 sass-loader 之前
-              'sass-loader'
+              'sass-loader',
+              {
+                loader: 'sass-resources-loader',
+                options: {
+                  resources: [
+                    path.resolve(__dirname, scssVariableFilePath)
+                  ]
+                }
+              }
             ]
           }
         ]
@@ -128,7 +149,15 @@ const devWebpackConfig = merge(baseWebpackConfig, {
                 options: createCssLoaderConfig(true, 2)
               },
               'postcss-loader',
-              'less-loader'
+              'less-loader',
+              {
+                loader: 'sass-resources-loader',
+                options: {
+                  resources: [
+                    path.resolve(__dirname, lessVariableFilePath)
+                  ]
+                }
+              }
             ]
           },
           {
@@ -141,7 +170,15 @@ const devWebpackConfig = merge(baseWebpackConfig, {
                 }
               },
               'postcss-loader', // 新版 postcss-loader 要放在 less-loader 之前
-              'less-loader'
+              'less-loader',
+              {
+                loader: 'sass-resources-loader',
+                options: {
+                  resources: [
+                    path.resolve(__dirname, lessVariableFilePath)
+                  ]
+                }
+              }
             ]
           }
         ]
