@@ -34,6 +34,7 @@
             placeholder="请输入您的密码"
             onfocus="this.placeholder=''"
             onblur="this.placeholder='请输入您的密码'"
+            @keyup.enter="onClick"
           >
           <div class="login-center-input-text">
             密码
@@ -44,7 +45,7 @@
         <fast-button
           type="primary"
           :loading="loading"
-          @click="onClick"
+          @click.enter="onClick"
         >
           {{ loading?'登录中':'登录' }}
         </fast-button>

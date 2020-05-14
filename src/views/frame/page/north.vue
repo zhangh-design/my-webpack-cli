@@ -1,13 +1,16 @@
 <template>
   <div :class="$style.northHeader">
-    <div>图片1111</div>
-    <div class="bbbbb">
-      menu
-    </div>
-    <div>登出xtong</div>
-    <p class="cccc">
-      胜多负少第三方第三方
-    </p>
+    <fast-double-wing-layout>
+      <template v-slot:left>
+        <div :class="$style.left" />
+      </template>
+      <template v-slot:middle>
+        <div>中间区域</div>
+      </template>
+      <template v-slot:right>
+        <div>右侧</div>
+      </template>
+    </fast-double-wing-layout>
   </div>
 </template>
 
@@ -22,18 +25,11 @@ export default {
 
 <style lang="less" module>
 @assets: '~@assets/img/frame/';
-.north-header {
-  display: flex;
-  flex-direction: row;
-}
-.north-header div:first-child {
-  color: @color;
+.left {
+  width: 70px;
   background-image: url('@{assets}avatar.jpg');
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
-}
-.north-header div:last-child {
-  color: @color;
 }
 </style>
