@@ -12,7 +12,7 @@
           <input
             type="text"
             name=""
-            v-model="name"
+            v-model.trim="name"
             placeholder="请输入您的用户名"
             onfocus="this.placeholder=''"
             onblur="this.placeholder='请输入您的用户名'"
@@ -30,7 +30,7 @@
           <input
             type="password"
             name=""
-            v-model="paswd"
+            v-model.trim="paswd"
             placeholder="请输入您的密码"
             onfocus="this.placeholder=''"
             onblur="this.placeholder='请输入您的密码'"
