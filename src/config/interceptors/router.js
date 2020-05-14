@@ -27,9 +27,10 @@ const routerBeforeEachFunc = function (to, from, next) {
     NProgress.done()
     return next({ path: '/' })
   }
-  setTimeout(() => {
+  next()
+  /* setTimeout(() => {
     next()
-  }, 1000)
+  }, 1000) */
 }
 
 /**
