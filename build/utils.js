@@ -23,10 +23,26 @@ exports.getIEDynamicImportModule = function () {
   }
 }
 
-// JS数组去掉某一个元素
+/**
+ * @desc JS数组去掉某一个元素
+ */
 exports.arrayRemove = function (list, val) {
-  var index = list.indexOf(val)
+  var index = list.findIndex((n) => n === val)
   if (index > -1) {
-    this.splice(index, 1)
+    list.splice(index, 1)
   }
+  return list
+}
+
+/**
+ * @desc JS数组去掉某些元素
+ */
+exports.arrayRemoveItems = function (list, vals = []) {
+  for (var i = 0; i < vals.length; i++) {
+    var index = list.findIndex((n) => n === vals[i])
+    if (index > -1) {
+      list.splice(index, 1)
+    }
+  }
+  return list
 }

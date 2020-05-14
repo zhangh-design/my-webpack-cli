@@ -4,6 +4,7 @@ const LodashWebpackPlugin = require('lodash-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const fastConfig = require('../fast.config.js')
+const packageConfig = require('../package.json')
 const utils = require('../build/utils.js')
 const config = require('../config/index.js')
 const merge = require('webpack-merge')
@@ -19,6 +20,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default
 const TerserPlugin = require('terser-webpack-plugin')
 
+const otherDependencies = utils.arrayRemoveItems(Object.keys(packageConfig.dependencies), fastConfig.removeOtherDependenciesCacheGroupsLibs || [])
 const webpackConfig = merge(baseWebpackConfig, {
   // 不设置 mode 默认 production
   mode: process.env.NODE_ENV || 'production',
@@ -89,7 +91,9 @@ const webpackConfig = merge(baseWebpackConfig, {
         },
         otherDependencies: {
           name: 'otherDependencies',
-          test: /vdjs|querystring|nprogress|moment|lodash-es|element-ui|vuex-persistedstate/ig,
+          // test: /vdjs|querystring|nprogress|moment|lodash-es|element-ui|vuex-persistedstate/ig,
+          // eslint-disable-next-line no-eval
+          test: eval('/' + otherDependencies.join('|') + '/g'),
           enforce: true
         },
         styles: {

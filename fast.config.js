@@ -46,6 +46,8 @@ module.exports = {
       global: 'axios'
     }
   ],
+  // 指定的依赖库不会被 splitChunks 分割到 otherDependencies 缓存组内
+  removeOtherDependenciesCacheGroupsLibs: ['@babel/runtime', '@babel/polyfill', '@babel/runtime-corejs3', 'axios-api-query', 'jquery', 'vue-router', 'vue', 'vuex', 'fast-element-ui', 'core-js', 'axios'],
   // 全局提供帮助类库和工具函数（暴露全局变量），会增加构建 bundle 的体积不要配置太多
   providePlugin: {
     // $: 'jquery',
