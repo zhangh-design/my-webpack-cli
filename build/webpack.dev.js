@@ -1,6 +1,7 @@
 const path = require('path')
 const config = require('../config')
 const fastConfig = require('../fast.config.js')
+const createCssLoaderConfig = require('./css-loader.conf.js')
 const merge = require('webpack-merge')
 const webpack = require('webpack')
 const baseWebpackConfig = require('./webpack.base.js')
@@ -44,81 +45,105 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     rules: [
       {
         test: /\.css$/,
-        use: [
-          'vue-style-loader', // https://vue-loader.vuejs.org/zh/guide/extract-css.html#webpack-4
-          /* {
-            loader: 'style-loader', // 把 css 样式内容内联到 style 标签内
-            options: {
-              // 是否合并 style 标签，处理为单个style标签
-              injectType: fastConfig.isDevCssOneStyle ? 'singletonStyleTag' : 'styleTag'
-            }
-          }, */
-          // 'css-loader', // 处理 .css 文件
+        oneOf: [
+          // 这里匹配 `<style module>`
           {
-            loader: 'css-loader',
-            // import 导入的 css 模块不适用 cssModule 功能（.vue 模块中开启了 cssModule）
-            options: {
-              // importLoaders，这个参数用于配置 css-loader 作用于 @import 的资源之前有多少个 loader
-              // 也可以通过增加 postcss-loader 的插件 postcss-import 来达到同样效果
-              importLoaders: 1 // 0 => 默认，没有 loader;1 => postcss-loader;
-              /* modules: {
-                localIdentName: config.dev.localIdentName
-              } */ // 模块化，指的是这个 css 只在这个模块里有效 （import style from './a.scss'; 取某个class属性 style.avatar）
-            }
+            resourceQuery: /module/,
+            use: [
+              'vue-style-loader',
+              {
+                loader: 'css-loader',
+                options: createCssLoaderConfig(true, 1)
+              },
+              'postcss-loader'
+            ]
           },
-          'postcss-loader' // 构建时调用 autoprefixer 自动添加浏览器厂商前缀 （webkit、moz、ms）
+          // 这里匹配普通的 `<style>` 或 `<style scoped>`
+          {
+            use: [
+              'vue-style-loader',
+              /* {
+                loader: 'style-loader', // 把 css 样式内容内联到 style 标签内
+                options: {
+                  // 是否合并 style 标签，处理为单个style标签
+                  injectType: fastConfig.isDevCssOneStyle ? 'singletonStyleTag' : 'styleTag'
+                }
+              }, */
+              {
+                loader: 'css-loader', // 处理 .css 文件
+                options: {
+                  // importLoaders，这个参数用于配置 css-loader 作用于 @import 的资源之前有多少个 loader
+                  // 也可以通过增加 postcss-loader 的插件 postcss-import 来达到同样效果
+                  importLoaders: 1 // 0 => 默认，没有 loader;1 => postcss-loader;
+                }
+              },
+              'postcss-loader' // 构建时调用 autoprefixer 自动添加浏览器厂商前缀 （webkit、moz、ms）
+              // 例如 element-ui 样式库会有主题 css文件存在于 node_modules 中，所以 css 文件的 loader 不应该加入 include 和 exclude
+              // import 'element-ui/lib/theme-chalk/index.css' 这个主题样式是在 node_modules 中的
+              // include: [resolve('src'), resolve('test')]
+              // exclude: /node_modules/
+            ]
+          }
         ]
-        // 例如 element-ui 样式库会有主题 css文件存在于 node_modules 中，所以 css 文件的 loader 不应该加入 include 和 exclude
-        // import 'element-ui/lib/theme-chalk/index.css' 这个主题样式是在 node_modules 中的
-        // include: [resolve('src'), resolve('test')]
-        // exclude: /node_modules/
       },
       {
         test: /\.(sa|sc)ss$/,
-        use: [
-          'vue-style-loader',
-          /* {
-            loader: 'style-loader', // 把 css 样式内容内联到 style 标签内
-            options: {
-              // 是否合并 style 标签，处理为单个style标签
-              injectType: fastConfig.isDevCssOneStyle ? 'singletonStyleTag' : 'styleTag'
-            }
-          }, */
+        oneOf: [
           {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2 // 0 => 默认，没有 loader;2 => postcss-loader, sass-loader
-              /* modules: {
-                localIdentName: config.dev.localIdentName
-              } */
-            }
+            resourceQuery: /module/,
+            use: [
+              'vue-style-loader',
+              {
+                loader: 'css-loader',
+                options: createCssLoaderConfig(true, 2)
+              },
+              'postcss-loader',
+              'sass-loader'
+            ]
           },
-          'postcss-loader', // 新版 postcss-loader 要放在 sass-loader 之前
-          'sass-loader'
+          {
+            use: [
+              'vue-style-loader',
+              {
+                loader: 'css-loader',
+                options: {
+                  importLoaders: 2
+                }
+              },
+              'postcss-loader', // 新版 postcss-loader 要放在 sass-loader 之前
+              'sass-loader'
+            ]
+          }
         ]
       },
       {
         test: /\.less$/,
-        use: [
-          'vue-style-loader',
-          /* {
-            loader: 'style-loader', // 把 css 样式内容内联到 style 标签内
-            options: {
-              // 是否合并 style 标签，处理为单个style标签
-              injectType: fastConfig.isDevCssOneStyle ? 'singletonStyleTag' : 'styleTag'
-            }
-          }, */
+        oneOf: [
           {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2 // 0 => 默认，没有 loader;2 => postcss-loader, less-loader
-              /* modules: {
-                localIdentName: config.dev.localIdentName
-              } */
-            }
+            resourceQuery: /module/,
+            use: [
+              'vue-style-loader',
+              {
+                loader: 'css-loader',
+                options: createCssLoaderConfig(true, 2)
+              },
+              'postcss-loader',
+              'less-loader'
+            ]
           },
-          'postcss-loader', // 新版 postcss-loader 要放在 less-loader 之前
-          'less-loader'
+          {
+            use: [
+              'vue-style-loader',
+              {
+                loader: 'css-loader',
+                options: {
+                  importLoaders: 2
+                }
+              },
+              'postcss-loader', // 新版 postcss-loader 要放在 less-loader 之前
+              'less-loader'
+            ]
+          }
         ]
       }
     ]

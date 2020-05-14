@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const fastConfig = require('../fast.config.js')
 const packageConfig = require('../package.json')
+const createCssLoaderConfig = require('./css-loader.conf.js')
 const utils = require('../build/utils.js')
 const config = require('../config/index.js')
 const merge = require('webpack-merge')
@@ -119,60 +120,122 @@ const webpackConfig = merge(baseWebpackConfig, {
     rules: [
       {
         test: /\.css$/,
-        use: [
+        oneOf: [
           {
-            // webpack 4 的版本 生产环境 不在需要使用 'vue-style-loader'
-            // [webpack 3 版本的配置请看下面链接](https://vue-loader.vuejs.org/zh/guide/extract-css.html#webpack-4)
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              esModule: false
-            }
+            resourceQuery: /module/,
+            use: [
+              {
+                loader: MiniCssExtractPlugin.loader,
+                options: {
+                  esModule: false
+                }
+              },
+              {
+                loader: 'css-loader',
+                options: createCssLoaderConfig(true, 1)
+              },
+              'postcss-loader'
+            ]
           },
           {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1
-            }
-          },
-          'postcss-loader'
+            use: [
+              {
+                // webpack 4 的版本 生产环境 不在需要使用 'vue-style-loader'
+                // [webpack 3 版本的配置请看下面链接](https://vue-loader.vuejs.org/zh/guide/extract-css.html#webpack-4)
+                loader: MiniCssExtractPlugin.loader,
+                options: {
+                  esModule: false
+                }
+              },
+              {
+                loader: 'css-loader',
+                options: {
+                  importLoaders: 1
+                }
+              },
+              'postcss-loader'
+            ]
+          }
         ]
       },
       {
         test: /\.(sa|sc)ss$/,
-        use: [
+        oneOf: [
           {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              esModule: false
-            }
+            resourceQuery: /module/,
+            use: [
+              {
+                loader: MiniCssExtractPlugin.loader,
+                options: {
+                  esModule: false
+                }
+              },
+              {
+                loader: 'css-loader',
+                options: createCssLoaderConfig(true, 2)
+              },
+              'postcss-loader',
+              'sass-loader'
+            ]
           },
           {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2
-            }
-          },
-          'postcss-loader', // 新版 postcss-loader 要放在 sass-loader 之前
-          'sass-loader'
+            use: [
+              {
+                loader: MiniCssExtractPlugin.loader,
+                options: {
+                  esModule: false
+                }
+              },
+              {
+                loader: 'css-loader',
+                options: {
+                  importLoaders: 2
+                }
+              },
+              'postcss-loader', // 新版 postcss-loader 要放在 sass-loader 之前
+              'sass-loader'
+            ]
+          }
         ]
       },
       {
         test: /\.less$/,
-        use: [
+        oneOf: [
           {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              esModule: false
-            }
+            resourceQuery: /module/,
+            use: [
+              {
+                loader: MiniCssExtractPlugin.loader,
+                options: {
+                  esModule: false
+                }
+              },
+              {
+                loader: 'css-loader',
+                options: createCssLoaderConfig(true, 2)
+              },
+              'postcss-loader',
+              'less-loader'
+            ]
           },
           {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2
-            }
-          },
-          'postcss-loader',
-          'less-loader'
+            use: [
+              {
+                loader: MiniCssExtractPlugin.loader,
+                options: {
+                  esModule: false
+                }
+              },
+              {
+                loader: 'css-loader',
+                options: {
+                  importLoaders: 2
+                }
+              },
+              'postcss-loader',
+              'less-loader'
+            ]
+          }
         ]
       }
     ]

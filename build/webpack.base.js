@@ -8,7 +8,6 @@ const webpack = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const createVueLoaderConfig = require('./vue-loader.conf.js')
 // const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
-// console.info('aaaaaaaaaaaaa ', utils.arrayRemove(Object.keys(packageConfig.dependencies), ['@babel/polyfill', '@babel/runtime-corejs3', 'axios-api-query', '@babel/runtime', 'core-js', 'axios', 'jquery', 'vue-router', 'vue', 'vuex']))
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -82,7 +81,11 @@ module.exports = {
       },
       {
         test: /\.jsx?$/, // x? 表示同时使用 babel-loader 解析 js 和 jsx 文件
-        exclude: /node_modules/,
+        // exclude: /node_modules/,
+        exclude: file => (
+          /node_modules/.test(file) &&
+          !/\.vue\.js/.test(file)
+        ), // https://vue-loader.vuejs.org/zh/migrating.html#%E4%BB%8E%E4%BE%9D%E8%B5%96%E4%B8%AD%E5%AF%BC%E5%85%A5%E5%8D%95%E6%96%87%E4%BB%B6%E7%BB%84%E4%BB%B6
         include: [resolve('src'), resolve('test')],
         loader: 'babel-loader',
         options: {

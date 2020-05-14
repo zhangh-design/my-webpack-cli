@@ -6,43 +6,30 @@
       ref="fast-panel-ref"
     >
       <template v-slot:north>
-        <div style="background-color: #4989F4;">
-          north面板
-        </div>
-      </template>
-      <template v-slot:west>
-        <div style="background-color: #DC5145;">
-          west面板
-        </div>
+        <north />
       </template>
       <template v-slot:center>
-        <div style="background-color: #179656;">
-          center面板
-        </div>
+        <center />
       </template>
-      <template v-slot:east>
-        <div style="background-color: #DC5145;">
-          east面板
-        </div>
-      </template>
-      <template v-slot:south>
-        <div style="background-color: #FECC42;">
-          south面板
-        </div>
+      <template v-slot:west>
+        <west />
       </template>
     </fast-panel>
   </div>
 </template>
 
 <script>
+import North from './page/north.vue'
+import Center from './page/center.vue'
+import West from './page/west.vue'
+
 export default {
+  components: { North, Center, West },
   data () {
     this.layoutConfig = {
-      border: true,
-      northHeight: '100px',
-      southHeight: '100px'
-      // westWidth: '100px',
-      // eastWidth: '50px'
+      border: false,
+      northHeight: '50px',
+      westWidth: '160px'
     }
     return {
 
