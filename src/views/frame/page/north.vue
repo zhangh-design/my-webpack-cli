@@ -20,15 +20,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
-@import "./css/north.less";
-.bbbbb{
-  color: @color;
-}
-</style>
-
 <style lang="less" module>
-// @import "@assets/css/less/variables.less";
 @assets: '~@assets/img/frame/';
 .north-header {
   display: flex;
