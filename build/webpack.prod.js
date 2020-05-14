@@ -137,7 +137,7 @@ const webpackConfig = merge(baseWebpackConfig, {
               },
               {
                 loader: 'css-loader',
-                options: createCssLoaderConfig(true, 1)
+                options: createCssLoaderConfig(false, 1)
               },
               'postcss-loader'
             ]
@@ -177,7 +177,7 @@ const webpackConfig = merge(baseWebpackConfig, {
               },
               {
                 loader: 'css-loader',
-                options: createCssLoaderConfig(true, 2)
+                options: createCssLoaderConfig(false, 2)
               },
               'postcss-loader',
               'sass-loader',
@@ -233,7 +233,7 @@ const webpackConfig = merge(baseWebpackConfig, {
               },
               {
                 loader: 'css-loader',
-                options: createCssLoaderConfig(true, 2)
+                options: createCssLoaderConfig(false, 2)
               },
               'postcss-loader',
               'less-loader',
