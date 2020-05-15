@@ -13,6 +13,7 @@
             type="text"
             name=""
             v-model.trim="name"
+            v-focus="'focused'"
             placeholder="请输入您的用户名"
             onfocus="this.placeholder=''"
             onblur="this.placeholder='请输入您的用户名'"

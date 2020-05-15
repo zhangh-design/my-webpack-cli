@@ -7,12 +7,14 @@ import { Message, Input, Button, Container, Header, Aside, Main, Footer } from '
 import { FastTextInput, FastButton, FastPanel, FastBorderLayout, FastDoubleWingLayout } from 'fast-element-ui'
 import 'fast-element-ui/lib/theme-default/index.css'
 import '@assets/css/main.css'
+import Vfocus from '@/directives/v-f-focus/index.js'
 
 Vue.use(inject)
 Vue.use(FastTextInput, Input)
 Vue.use(FastButton, Button)
 Vue.use(FastPanel, [Container, Header, Aside, Main, Footer, FastBorderLayout])
 Vue.use(FastDoubleWingLayout)
+Vue.use(Vfocus)
 Vue.prototype.$message = Message
 
 new Vue({
