@@ -3,6 +3,7 @@
  */
 import store from '@/store/index.js'
 import NProgress from 'nprogress'
+import { WINDOW_TITLE_UPDATE } from '@/config/index.js'
 const fastConfig = require('../../../fast.config.js')
 /**
  * @desc 全局前置守卫
@@ -12,6 +13,9 @@ const fastConfig = require('../../../fast.config.js')
  */
 const routerBeforeEachFunc = function (to, from, next) {
   NProgress.start()
+  if ('title' in to.meta && WINDOW_TITLE_UPDATE) {
+    document.title = to.meta.title
+  }
   // 白名单直接跳转
   if (fastConfig.routerWhiteList.includes(to.name)) {
     NProgress.done()

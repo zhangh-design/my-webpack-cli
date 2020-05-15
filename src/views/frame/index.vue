@@ -28,7 +28,7 @@ export default {
   data () {
     this.layoutConfig = {
       border: false,
-      northHeight: '70px',
+      northHeight: '50px',
       westWidth: '160px'
     }
     return {

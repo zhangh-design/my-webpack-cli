@@ -9,6 +9,7 @@ import {
   routerAfterEachFunc,
   routerOnReady
 } from '@/config/interceptors/router.js'
+import routes from '@service/routes/index.js'
 
 Vue.use(Router)
 
@@ -22,14 +23,7 @@ const constRouterMap = [
   {
     path: '/',
     name: 'mainframe',
-    component: () => import(/* webpackChunkName:"views/frame" */ '@/views/frame/index.vue'),
-    children: []
-  },
-  {
-    path: '/helper',
-    name: 'helper',
-    component: () => import(/* webpackChunkName:"views/frame" */ '@/views/helper/index.vue'),
-    children: []
+    component: () => import(/* webpackChunkName:"views/frame" */ '@/views/frame/index.vue')
   },
   {
     path: '*', // 404 页面
@@ -40,7 +34,7 @@ const constRouterMap = [
 // 初始化 router 实例
 const instance = new Router({
   ...ROUTER_DEFAULT_CONFIG,
-  routes: constRouterMap
+  routes: (routes.concat(constRouterMap))
 })
 // 设置拦截器
 instance.onReady(routerOnReady)

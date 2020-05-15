@@ -83,7 +83,7 @@ export default {
   border-bottom: 2px solid #2395F1;
 }
 .left {
-  width: 70px;
+  width: 50px;
   background-image: url('@{assets}avatar.jpg');
   background-position: 50% 50%;
   background-size: cover;
