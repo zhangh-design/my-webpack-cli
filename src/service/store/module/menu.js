@@ -8,8 +8,12 @@ const state = {
   menu: null
 }
 const getters = {
-  getMenu: state => {
-    return { ...state.menu }
+  getMenuInfo: state => {
+    // return { ...state.menu }
+    return [
+      { name: '接口', code: 'api', id: 1 },
+      { name: '系统', code: 'system', id: 2 }
+    ]
   }
 }
 const actions = {

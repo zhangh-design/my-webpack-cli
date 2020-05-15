@@ -5,7 +5,16 @@
         <div :class="$style.left" />
       </template>
       <template v-slot:middle>
-        <div>中间区域</div>
+        <ul :class="$style.middle">
+          <li
+            v-for="(item, index) in menuInfo"
+            :key="item.id"
+            :class="{ [$style.active]:isActive==index }"
+            @click="isActive=index"
+          >
+            {{ item.name }}
+          </li>
+        </ul>
       </template>
       <template v-slot:right>
         <div :class="$style.right">
@@ -17,7 +26,10 @@
               alt=""
             >
           </p>
-          <p class="el-icon-right">
+          <p
+            class="el-icon-right"
+            @click="onExitClick"
+          >
             登出
           </p>
         </div>
@@ -32,22 +44,34 @@ export default {
   name: 'FramePageNorth',
   computed: {
     ...mapGetters({
-      userInfo: 'login/getUserInfo'
+      userInfo: 'login/getUserInfo',
+      menuInfo: 'menu/getMenuInfo'
     })
   },
   data () {
-    return {}
+    return {
+      isActive: 0
+    }
   },
   created () {
-    /* this.$api['menu/getMenu']({ restful: { id: this.userInfo.id } }).then(resData => {
-      console.info('aaaaaaa ', resData)
-    }) */
     this['menu/getMenu']()
   },
   methods: {
     ...mapActions([
-      'menu/getMenu'
-    ])
+      'menu/getMenu',
+      'login/exitAxtion'
+    ]),
+    onExitClick (event) {
+      this.$confirm('是否需要退出系统?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this['login/exitAxtion']().then(() => {
+          this.$router.replace({ name: 'login' })
+        })
+      }).catch(() => {})
+    }
   }
 }
 </script>
@@ -55,6 +79,9 @@ export default {
 <style lang="less" module>
 @import "./css/north.less";
 @assets: '~@assets/img/frame/';
+.active{
+  border-bottom: 2px solid #2395F1;
+}
 .left {
   width: 70px;
   background-image: url('@{assets}avatar.jpg');
@@ -78,5 +105,24 @@ export default {
   color: #fff;
   border-radius: 3px;
   background-color: #73A4F8;
+}
+.middle{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0px 5px 0px 5px;
+}
+.middle>li{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  margin: 0px 10px 0px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  // background-color: turquoise;
+}
+.middle>li:hover{
+  border-bottom: 2px solid #2395F1;
 }
 </style>
