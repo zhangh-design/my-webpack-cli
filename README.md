@@ -45,6 +45,8 @@ src
  |-config
    |-interceptors（拦截器）
    |-index.js （项目配置）
+ |-directives （自定义指令）
+ |-filters （自定义过滤器）
  |-plugins （插件）
  |-router （vue-router实例）
  |-service （模型文件）
