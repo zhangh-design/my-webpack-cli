@@ -10,7 +10,7 @@
             v-for="(item, index) in menuInfo"
             :key="item.id"
             :class="{ [$style.active]:isActive==index }"
-            @click="isActive=index"
+            @click="onMenuClick(index, item, $event)"
           >
             {{ item.name }}
           </li>
@@ -61,6 +61,11 @@ export default {
       'menu/getMenu',
       'login/exitAxtion'
     ]),
+    onMenuClick (index, item, event) {
+      this.isActive = index
+      this.$router.replace({ path: `/${item.code}` })
+      console.log(index, item, event)
+    },
     onExitClick (event) {
       this.$confirm('是否需要退出系统?', '提示', {
         confirmButtonText: '确定',

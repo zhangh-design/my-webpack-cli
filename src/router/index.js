@@ -13,28 +13,10 @@ import routes from '@service/routes/index.js'
 
 Vue.use(Router)
 
-// 不需要按模块化划分的路由
-const constRouterMap = [
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import(/* webpackChunkName:"views/login" */ '@/views/login/index.vue')
-  },
-  {
-    path: '/',
-    name: 'mainframe',
-    component: () => import(/* webpackChunkName:"views/frame" */ '@/views/frame/index.vue')
-  },
-  {
-    path: '*', // 404 页面
-    component: () => import(/* webpackChunkName:"views/404" */ '@/views/error-page/404.vue')
-  }
-]
-
 // 初始化 router 实例
 const instance = new Router({
   ...ROUTER_DEFAULT_CONFIG,
-  routes: (routes.concat(constRouterMap))
+  routes
 })
 // 设置拦截器
 instance.onReady(routerOnReady)
