@@ -74,7 +74,7 @@ export default {
       this.loading = true
       this['login/loginAction']({ name: this.name, pswd: this.paswd }).then(() => {
         this.$message({ message: '验证成功', type: 'success', duration: 1000 })
-        this.$router.push({ path: '/' })
+        this.$router.push({ path: '/api' })
       }).catch((error) => {
         console.error(error)
       }).finally(() => {
