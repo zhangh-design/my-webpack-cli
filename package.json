@@ -84,7 +84,7 @@
     "axios-api-query": "^1.0.13",
     "core-js": "^3.6.4",
     "element-ui": "^2.13.1",
-    "fast-element-ui": "^0.1.33",
+    "fast-element-ui": "^0.1.36",
     "jquery": "^3.5.0",
     "lodash-es": "^4.17.15",
     "moment": "^2.24.0",

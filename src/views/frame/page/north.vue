@@ -88,7 +88,10 @@ export default {
   border-bottom: 2px solid #2395F1;
 }
 .left {
-  width: 50px;
+  width: 40px;
+  height: 40px;
+  margin-top: 5px;
+  margin-left: 5px;
   background-image: url('@{assets}avatar.jpg');
   background-position: 50% 50%;
   background-size: cover;
@@ -113,6 +116,7 @@ export default {
 }
 .middle{
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   padding: 0px 5px 0px 5px;
